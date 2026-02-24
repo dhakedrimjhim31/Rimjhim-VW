@@ -1,0 +1,47 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin-top: 80px;
+    background-color: #e9f0f7;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.bulb-wrapper img {
+    width: 150px;
+    transition: all 0.4s ease;
+}
+
+/* Glow effect when ON */
+.glow {
+    filter: drop-shadow(0 0 20px yellow)
+            drop-shadow(0 0 40px orange);
+}
+
+/* Button Styling */
+button {
+    padding: 10px 25px;
+    margin: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#onButton {
+    background-color: green;
+    color: white;
+}
+
+#offButton {
+    background-color: crimson;
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
