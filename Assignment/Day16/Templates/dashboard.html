@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ role.capitalize() }} Dashboard</title>
+    </head>
+
+    <body>
+
+        <h2>{{ role.capitalize() }} Dashboard</h2>
+
+        <!---Navigation Changes--->
+        <nav>
+            <a href="#">Home</a>
+
+            {% if role == "admin" %}
+                <a href="#">Manage Users</a>
+                <a href="#">Reports</a>
+            {% elif role == "manager" %}
+                <a href="#">Team Overview</a>
+            {% else %}
+                <a href="#">My Profile</a>
+            {% endif %}
+        </nav>
+
+        <hr>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Department</th>
+
+                {% if role in ["admin", "manager"] %}
+                    <th>Salary</th>
+                {% endif %}
+
+                {% if role == "admin" %}
+                    <th>Actions</th>
+                {% endif %}
+            </tr>
+
+            {% for emp in employees %}
+            <tr>
+                <td>{{ emp.name }}</td>
+                <td>{{ emp.department }}</td>
+
+                {% if role in ["admin", "manager"] %}
+                    <td>{{ emp.salary }}</td>
+                {% endif %}
+
+                {% if role == "admin" %}
+                    <td>
+                        <button>Delete</button>
+                    </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        
+    </body>
+</html>

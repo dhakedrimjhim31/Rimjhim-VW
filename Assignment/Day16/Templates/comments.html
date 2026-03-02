@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Comments Dashboard</title>
+    </head>
+    <body>
+
+        <h2>All Comments</h2>
+
+        {% for c in comments %}
+            <div style="
+            border:1px solid black;
+            padding:10px;
+            margin:10px;
+            {% if c.flagged %} background-color: #ffcccc; {% endif %}
+            ">
+
+            <h3>{{ c.username.upper() }}</h3>
+
+            <p>{{ c.comment }}</p>
+
+            <p>Likes: {{ c.likes }}</p>
+
+            {% if c.likes > 100 %}
+                <strong> 🔥 Trending</strong><br>
+            {% endif %}
+
+            {% if c.comments | length > 200 %}
+                <strong>📖 Long Post</strong><br>
+            {% endif %}
+
+            {% if c.flagged %}
+                <strong> Flagged</strong>
+            {% endif %}
+
+            </div>
+        {% endfor %}
+
+        <hr>
+
+        <h2>Statistics</h2>
+
+        <p>Total Comments: {{ total_comments }}</p>
+        <p>Total Flagged Comments: {{ total_flagged }}</p>
+        <p>Most Liked Comment By: {{ most_liked.username.upper() }} ({{ most_liked.likes }} likes)</p>
+        <p>All Usernames: {{all_usernames }}</p>
+
+    </body>
+</html>
