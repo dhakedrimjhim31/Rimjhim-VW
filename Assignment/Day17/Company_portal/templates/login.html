@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assignment 1</title>
+        <style>
+            div {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px;
+            }
+
+            button {
+                width: 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>LOGIN</h2>
+        <form method="post" action="{{url_for('auth.submit')}}">
+            <div>
+                <label>
+                    Username
+                    <input type="text" name="username">
+                </label>
+
+                <label>
+                    Role
+                    <select name="role">
+                        <option value="admin">Admin</option>
+                        <option value="hr">HR</option>
+                        <option value="employee">Employee</option>
+                    </select>
+                </label>
+
+                <label>
+                    Remember me
+                    <input type="checkbox" name="remember">
+                </label>
+                
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </body>
+</html>

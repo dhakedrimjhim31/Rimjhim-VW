@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Products</h2>
+
+<div class="row">
+{% for name, price in products.items() %}
+   <div class="col-md-4 mb-4">
+       <div class="card shadow">
+           <div class="card-body">
+               <h5>{{ name }}</h5>
+               <p> ₹ {{ name }}</p>
+               <a href="/products/add/{{ name }}" class="btn btn-primary">
+                  Add to Cart
+               </a>
+           </div>
+       </div>
+   </div>
+
+{% endfor %}
+</div>
+
+{% endblock %}
