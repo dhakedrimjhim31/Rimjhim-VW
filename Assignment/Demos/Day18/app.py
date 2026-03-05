@@ -123,3 +123,55 @@ axios.post('http:localhost:5000/api/products',{
 }).then(resp=>{
     console.log("Created",resp.data)
 }).catch(err=>console.log(err))
+
+
+
+
+5///////
+from flask import Flask, jsonify
+from flask_cors import CORS
+
+app = Flask(_name_)
+CORS(app)
+
+products = [
+    {"id":1, "name":"Laptop", "price":50000},
+    {"id":2, "name":"Mobile", "price":20000},
+    {"id":3, "name":"Headphones", "price":2000}
+]
+
+@app.route("/api/products")
+def get_products():
+    return jsonify(products)
+
+if _name_ == "_main_":
+    app.run(debug=True)
+
+6////////////
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Products API</h2>
+<button onclick="loadProducts()">Get Products</button>
+
+<script>
+
+async function loadProducts(){
+
+let response = await fetch("http://127.0.0.1:5000/api/products");
+
+let data = await response.json();
+
+console.log(data);   // Shows whole API response
+
+data.forEach(product => {
+console.log(product.name + " - " + product.price);
+});
+
+}
+
+</script>
+
+</body>
+</html>
