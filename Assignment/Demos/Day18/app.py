@@ -61,7 +61,7 @@ if __name__=='__main__':
 
     app.run(debug=True)
 
-
+////
 let promise=new Promise(function(resolve,reject){
                 let success=true;
                 if(success){
@@ -81,7 +81,7 @@ let promise=new Promise(function(resolve,reject){
 
 
 
-
+////
 fetch('http://localhost:5000/api/products',{
             method:"POST",
             headers:{
@@ -104,3 +104,22 @@ fetch('http://localhost:5000/api/products',{
  
  
             </script>
+
+
+
+/////
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+////
+axios.get('http://localhost:5000/api/products')
+.then(resp=>console.log(resp.data))
+.catch(err=>console.log(err))
+            </script>
+
+////
+axios.post('http:localhost:5000/api/products',{
+    name:"Headphones",
+    price:2000
+}).then(resp=>{
+    console.log("Created",resp.data)
+}).catch(err=>console.log(err))
