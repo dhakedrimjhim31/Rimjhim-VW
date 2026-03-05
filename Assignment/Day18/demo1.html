@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            let promise=new Promise(function(resolve,reject){
+                let success=true;
+                if(success){
+                    resolve("Operation success")
+                }else{
+                    reject("Operation failed")
+                }
+            })
+ 
+            promise.then(function(result){
+                console.log(result)
+ 
+            }).catch(function(err){
+                console.log(err)
+            })
+ 
+        </script>
+    </head>
+</html>

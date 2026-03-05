@@ -1,0 +1,7 @@
+name,price,stock
+Laptop,70000,10
+Mouse,500,100
+Keyboard,1200,50
+Laptop,,10
+Mouse,abc,20
+Keyboard,1200,-5
