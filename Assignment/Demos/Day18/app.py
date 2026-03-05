@@ -267,3 +267,42 @@ def get_products():
 
 if _name_ == "_main_":
     app.run(debug=True)
+
+
+
+
+9///////////
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Upload Product CSV</h2>
+
+<input type="file" id="fileInput">
+<button onclick="uploadFile()">Upload</button>
+
+<script>
+
+async function uploadFile(){
+
+let file = document.getElementById("fileInput").files[0];
+
+let formData = new FormData();
+formData.append("file", file);
+
+let response = await fetch("http://127.0.0.1:5000/upload-products", {
+method: "POST",
+body: formData
+});
+
+let data = await response.json();
+
+console.log(data);   // console output
+alert(JSON.stringify(data)); // popup output
+
+}
+
+</script>
+
+</body>
+</html>
