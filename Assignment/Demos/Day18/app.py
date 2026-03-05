@@ -58,4 +58,49 @@ def delete_product(product_id):
  
  
 if __name__=='__main__':
+
     app.run(debug=True)
+
+
+let promise=new Promise(function(resolve,reject){
+                let success=true;
+                if(success){
+                    resolve("Operation success")
+                }else{
+                    reject("Operation failed")
+                }
+            })
+ 
+            promise.then(function(result){
+                console.log(result)
+ 
+            }).catch(function(err){
+                console.log(err)
+            })
+
+
+
+
+
+fetch('http://localhost:5000/api/products',{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                name:"Tablet",
+                price:20000
+            })
+         })
+         .then(resp=>{
+            console.log("Response",resp)
+            return resp.json()
+         })
+         .then(data=>{
+            console.log("Created",data)
+         })
+         .catch(err=>console.log(err))
+ 
+ 
+ 
+            </script>
