@@ -1,6 +1,8 @@
+#Create Database:
 CREATE DATABASE ecommerce_analysis;
 USE ecommerce_analysis;
 
+#Create Orders Table:
 CREATE TABLE Orders(
 order_id INT PRIMARY KEY,
 customer_id INT,
@@ -9,6 +11,7 @@ quantity INT,
 total_amount INT
 );
 
+#Inserting values:
 INSERT INTO Orders VALUES
 (1,101,201,20,5000),
 (2,102,202,15,3000),
@@ -31,24 +34,29 @@ INSERT INTO Orders VALUES
 (19,109,204,25,4500),
 (20,110,205,70,14000);
 
+#Query1:Total amount spent by each customer
 SELECT customer_id, SUM(total_amount) AS total_spent
 FROM Orders
 GROUP BY customer_id;
 
+#Query2:Number of orders placed by each customer
 SELECT customer_id, COUNT(order_id) AS total_orders
 FROM Orders
 GROUP BY customer_id;
 
+#Query3:Customers who placed more than 3 orders
 SELECT customer_id, COUNT(order_id) AS total_orders
 FROM Orders
 GROUP BY customer_id
 HAVING COUNT(order_id) > 3;
 
+#Query4:Customers whose total spending is greater than 10,000
 SELECT customer_id, SUM(total_amount) AS total_spent
 FROM Orders
 GROUP BY customer_id
 HAVING SUM(total_amount) > 10000;
 
+#Query5:Products whose total quantity sold is greater than 100
 SELECT product_id, SUM(quantity) AS total_quantity
 FROM Orders
 GROUP BY product_id
