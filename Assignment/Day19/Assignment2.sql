@@ -1,18 +1,23 @@
+#Create Database:
 CREATE DATABASE retail_company;
 USE retail_company;
 
+#Create Tables:
+#Customers
 CREATE TABLE Customers(
 customer_id INT PRIMARY KEY,
 name VARCHAR(50),
 city VARCHAR(50)
 );
 
+#Products
 CREATE TABLE Products(
 product_id INT PRIMARY KEY,
 product_name VARCHAR(50),
 price INT
 );
 
+#Orders
 CREATE TABLE Orders(
 order_id INT PRIMARY KEY,
 customer_id INT,
@@ -21,6 +26,7 @@ total_amount INT,
 FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
+#Order_Items
 CREATE TABLE Order_Items(
 order_item_id INT PRIMARY KEY,
 order_id INT,
@@ -30,6 +36,8 @@ FOREIGN KEY (order_id) REFERENCES Orders(order_id),
 FOREIGN KEY (product_id) REFERENCES Products(product_id)
 );
 
+#Insert Values:
+#Customers
 INSERT INTO Customers VALUES
 (1,'Amit','Delhi'),
 (2,'Priya','Mumbai'),
@@ -42,6 +50,7 @@ INSERT INTO Customers VALUES
 (9,'Sneha','Bangalore'),
 (10,'Arjun','Ahmedabad');
 
+#Products
 INSERT INTO Products VALUES
 (101,'Laptop',60000),
 (102,'Mobile',30000),
@@ -54,6 +63,7 @@ INSERT INTO Products VALUES
 (109,'Speaker',3000),
 (110,'Camera',45000);
 
+#Orders
 INSERT INTO Orders VALUES
 (201,1,'2024-01-05',62000),
 (202,2,'2024-01-10',30000),
@@ -66,6 +76,7 @@ INSERT INTO Orders VALUES
 (209,3,'2024-04-20',3000),
 (210,1,'2024-05-01',45000);
 
+#Order_Items
 INSERT INTO Order_Items VALUES
 (1,201,101,1),
 (2,202,102,1),
@@ -78,28 +89,33 @@ INSERT INTO Order_Items VALUES
 (9,209,109,1),
 (10,210,110,1);
 
+Query1: Customers who placed more than 3 orders
 SELECT customer_id, COUNT(order_id) AS total_orders
 FROM Orders
 GROUP BY customer_id
 HAVING COUNT(order_id) > 3;
 
+#Query2:Total 5 customers by total spending
 SELECT customer_id, SUM(total_amount) AS total_spending
 FROM Orders
 GROUP BY customer_id
 ORDER BY total_spending DESC
 LIMIT 5;
 
+#Query3:Most ordered product
 SELECT product_id, SUM(quantity) AS total_quantity
 FROM Order_Items
 GROUP BY product_id
 ORDER BY total_quantity DESC
 LIMIT 1;
 
+#Query4:Customers who never placed an order
 SELECT name
 FROM Customers
 WHERE customer_id NOT IN
 (SELECT customer_id FROM Orders);
 
+#Query5:Total revenue generated each month
 SELECT MONTH(order_date) AS month,
 SUM(total_amount) AS total_revenue
 FROM Orders
