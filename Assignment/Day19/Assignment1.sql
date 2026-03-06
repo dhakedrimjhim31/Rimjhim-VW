@@ -54,19 +54,19 @@ INSERT INTO Employee_Project VALUES
 (3,102,45,4),
 (4,103,25,4);
 
-#Query 1:
+#Query 1: Employees who worked on more than 2 projects
 SELECT emp_id
 FROM Employee_Project
 GROUP BY emp_id
 HAVING COUNT(project_id) > 2;
 
-#Query2:
+#Query2: Employees whose average rating is above 4
 SELECT emp_id, AVG(rating) AS avg_rating
 FROM Employee_Project
 GROUP BY emp_id
 HAVING AVG(rating) > 4;
 
-#Query3:
+#Query3: Highest paid employee in each department
 SELECT emp_name, department, salary
 FROM Employees e
 WHERE salary = (
@@ -75,13 +75,13 @@ FROM Employees
 WHERE department = e.department
 );
 
-#Query4:
+#Query4: Employee who never worked on any project
 SELECT emp_name
 FROM Employees
 WHERE emp_id NOT IN
 (SELECT emp_id FROM Employee_Project);
 
-#Query5:
+#Query5: Project with highest total hours worked
 SELECT project_id, SUM(hours_worked) AS total_hours
 FROM Employee_Project
 GROUP BY project_id
