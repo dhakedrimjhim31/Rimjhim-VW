@@ -46,7 +46,7 @@ FROM Employees
 WHERE department = e.department
 );
 
-#Employees who earn less than the highest salary in the company but more than the average salary.
+#Query4:Employees who earn less than the highest salary in the company but more than the average salary.
 SELECT emp_name, salary
 FROM Employees
 WHERE salary < (SELECT MAX(salary) FROM Employees)
