@@ -1,0 +1,8 @@
+edit_student.html:
+
+<form method="post" action="/update/{{student.id}}">
+    <input type="text" name="name" value="{{student.name}}">
+    <input type="text" name="course" value="{{student.course}}">
+    <input type="email" name="email" value="{{student.email}}">
+    <input type="submit" value="Update">
+</form>

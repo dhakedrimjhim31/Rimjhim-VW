@@ -1,0 +1,21 @@
+<a href="/add">Add student</a>
+<table border="2">
+    <tr>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Email</th>
+        <th colspan="2">Action</th>
+ 
+    </tr>
+    {% for s in students %}
+    <tr>
+        <td>{{s.name}}</td>
+        <td>{{s.course}}</td>
+        <td>{{s.email}}</td>
+        <td><a href="/edit/{{s.id}}">Edit</a></td>
+        <td><a href="/delete/{{s.id}}">Delete</a></td>
+    </tr>
+    {% endfor %}
+ 
+</table>
+ 
