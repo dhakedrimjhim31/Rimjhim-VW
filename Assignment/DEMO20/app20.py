@@ -133,132 +133,113 @@ edit_student.html:
 
 
 ################################## ASSIGNMENT 1:
-class Config:
-    SQLALCHEMY_DATABASE_URI = "sqlite:///events.db"
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-
- from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from uploads.config import Config
 
 db = SQLAlchemy()
 
-def create_app():
-    app = Flask(_name_)
-    app.config.from_object(Config)
-
-    db.init_app(app)
-
-    from app.routes import main
-    app.register_blueprint(main)
-
-    return app
-
-from app import db
-
 class Event(db.Model):
+    _tablename_ = "events"
+
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    total_seats = db.Column(db.Integer)
-    available_seats = db.Column(db.Integer)
+    event_name = db.Column(db.String(100))
+    location = db.Column(db.String(100))
+    date = db.Column(db.String(50))
 
 class Registration(db.Model):
+    _tablename_ = "registrations"
+
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(100))
-    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id'))
+
 
 from flask import Blueprint, request, jsonify
-from app import db
-from app.models import Event, Registration
+from models import db, Event, Registration
 
-main = Blueprint("main", _name_)
+routes = Blueprint("routes", _name_)
 
-# Create event
-@main.route("/events", methods=["POST"])
+@routes.route("/create_event", methods=["POST"])
 def create_event():
     data = request.json
 
-    event = Event(
-        name=data["name"],
-        total_seats=data["total_seats"],
-        available_seats=data["total_seats"]
+    new_event = Event(
+        event_name=data["event_name"],
+        location=data["location"],
+        date=data["date"]
     )
 
-    db.session.add(event)
+    db.session.add(new_event)
     db.session.commit()
 
-    return jsonify({"message": "Event created"})
+    return jsonify({"message": "Event created successfully"})
 
 
-# List all events
-@main.route("/events", methods=["GET"])
+@routes.route("/register", methods=["POST"])
+def register():
+    data = request.json
+
+    new_registration = Registration(
+        name=data["name"],
+        email=data["email"],
+        event_id=data["event_id"]
+    )
+
+    db.session.add(new_registration)
+    db.session.commit()
+
+    return jsonify({"message": "Registration successful"})
+
+
+@routes.route("/events", methods=["GET"])
 def get_events():
     events = Event.query.all()
 
     result = []
-
     for e in events:
         result.append({
             "id": e.id,
-            "name": e.name,
-            "total_seats": e.total_seats,
-            "available_seats": e.available_seats
+            "event_name": e.event_name,
+            "location": e.location,
+            "date": e.date
         })
 
     return jsonify(result)
 
 
-# Register user
-@main.route("/register/<int:event_id>", methods=["POST"])
-def register_user(event_id):
-
-    event = Event.query.get(event_id)
-
-    if not event:
-        return jsonify({"message": "Event not found"})
-
-    if event.available_seats == 0:
-        return jsonify({"message": "Registration failed. No seats available"})
-
-    data = request.json
-
-    registration = Registration(
-        user_name=data["user_name"],
-        event_id=event_id
-    )
-
-    event.available_seats -= 1
-
-    db.session.add(registration)
-    db.session.commit()
-
-    return jsonify({"message": "User registered"})
-
-
-# Full events
-@main.route("/events/full", methods=["GET"])
-def full_events():
-
-    events = Event.query.filter_by(available_seats=0).all()
+@routes.route("/registrations", methods=["GET"])
+def get_registrations():
+    regs = Registration.query.all()
 
     result = []
-
-    for e in events:
+    for r in regs:
         result.append({
-            "id": e.id,
-            "name": e.name
+            "id": r.id,
+            "name": r.name,
+            "email": r.email,
+            "event_id": r.event_id
         })
 
     return jsonify(result)
 
 
- from app import create_app, db
 
-app = create_app()
+
+  from flask import Flask
+from models import db
+from routes import routes
+
+app = Flask(_name_)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost/eventdb'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+
+app.register_blueprint(routes)
 
 with app.app_context():
     db.create_all()
 
 if _name_ == "_main_":
-    app.run(debug=True)
-    
+    app.run(debug=True)  
