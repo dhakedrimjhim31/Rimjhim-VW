@@ -350,3 +350,50 @@ Password:
 
 {% endfor %}
 
+
+
+
+
+
+
+
+
+
+
+<h2>Employee Profile</h2>
+
+<p><b>Name:</b> {{ emp.name }}</p>
+<p><b>Email:</b> {{ emp.email }}</p>
+<p><b>Department:</b> {{ emp.department }}</p>
+<p><b>Manager ID:</b> {{ emp.manager_id }}</p>
+
+<a href="/employees">Back to Employees</a>
+
+
+
+
+
+
+
+
+<h2>Edit Employee</h2>
+
+<form method="POST">
+
+Name:
+<input type="text" name="name" value="{{ emp.name }}">
+<br><br>
+
+Email:
+<input type="text" name="email" value="{{ emp.email }}">
+<br><br>
+
+Department:
+<input type="text" name="department" value="{{ emp.department }}">
+<br><br>
+
+<button type="submit">Update</button>
+
+</form>
+
+<a href="/employees">Back</a>
