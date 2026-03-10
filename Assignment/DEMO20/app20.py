@@ -130,3 +130,223 @@ edit_student.html:
     <input type="email" name="email" value="{{student.email}}">
     <input type="submit" value="Update">
 </form>
+
+
+
+
+
+
+
+#############################ASSIGNMENT 1
+class Config:
+    SECRET_KEY = "secret123"
+
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:root@localhost/employee_portal"
+
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+
+class User(db.Model):
+
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    username = db.Column(db.String(50), unique=True)
+
+    password = db.Column(db.String(100))
+
+    role = db.Column(db.String(20))
+
+
+
+class Employee(db.Model):
+
+    __tablename__ = "employees"
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    name = db.Column(db.String(100))
+
+    email = db.Column(db.String(100))
+
+    department = db.Column(db.String(100))
+
+    manager_id = db.Column(db.Integer, db.ForeignKey('users.id'))  
+
+
+
+
+from functools import wraps
+from flask import session, redirect, url_for
+
+
+def role_required(*roles):
+
+    def wrapper(func):
+
+        @wraps(func)
+        def decorated_function(*args, **kwargs):
+
+            if "role" not in session:
+                return redirect(url_for("login"))
+
+            if session["role"] not in roles:
+                return "Access Denied"
+
+            return func(*args, **kwargs)
+
+        return decorated_function
+
+    return wrapper    
+
+
+
+
+
+    from flask import Flask, render_template, request, redirect, session
+from models import db, User, Employee
+from decorators import role_required
+from config import Config
+from flask_migrate import Migrate
+
+
+app = Flask(__name__)
+
+app.config.from_object(Config)
+
+db.init_app(app)
+
+migrate = Migrate(app, db)
+
+
+
+@app.route("/login", methods=["GET","POST"])
+def login():
+
+    if request.method == "POST":
+
+        username = request.form["username"]
+
+        password = request.form["password"]
+
+        user = User.query.filter_by(username=username,password=password).first()
+
+        if user:
+
+            session["user_id"] = user.id
+
+            session["role"] = user.role
+
+            return redirect("/employees")
+
+        else:
+
+            return "Invalid Login"
+
+    return render_template("login.html")
+
+
+
+@app.route("/employees")
+@role_required("admin","manager")
+def employees():
+
+    data = Employee.query.all()
+
+    return render_template("employees.html", employees=data)
+
+
+
+@app.route("/employee/<int:id>")
+def view_employee(id):
+
+    emp = Employee.query.get(id)
+
+    return render_template("profile.html", emp=emp)
+
+
+
+@app.route("/employee/<int:id>/edit", methods=["GET","POST"])
+def edit_employee(id):
+
+    emp = Employee.query.get(id)
+
+    if request.method == "POST":
+
+        emp.name = request.form["name"]
+
+        emp.email = request.form["email"]
+
+        emp.department = request.form["department"]
+
+        db.session.commit()
+
+        return redirect("/employees")
+
+    return render_template("edit_employee.html", emp=emp)
+
+
+
+@app.route("/employee/<int:id>/delete")
+@role_required("admin")
+def delete_employee(id):
+
+    emp = Employee.query.get(id)
+
+    db.session.delete(emp)
+
+    db.session.commit()
+
+    return redirect("/employees")
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
+
+
+
+<form method="POST">
+
+Username:
+<input type="text" name="username">
+
+Password:
+<input type="password" name="password">
+
+<button type="submit">Login</button>
+
+</form>
+
+
+
+
+
+<h2>Employee List</h2>
+
+{% for e in employees %}
+
+<p>
+
+{{e.name}} - {{e.department}}
+
+<a href="/employee/{{e.id}}">View</a>
+
+<a href="/employee/{{e.id}}/edit">Edit</a>
+
+<a href="/employee/{{e.id}}/delete">Delete</a>
+
+</p>
+
+{% endfor %}
+
