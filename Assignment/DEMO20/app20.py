@@ -135,3 +135,450 @@ edit_student.html:
 
     
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###############################ASSIGNMENT 1:
+
+SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:password@localhost/task_manager"
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+class Task(db.Model):
+    __tablename__ = "tasks"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    priority = db.Column(db.String(20), nullable=False)
+    completed = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime)
+
+
+
+
+
+
+
+
+
+
+
+
+
+    from flask import Flask, request, jsonify
+from flask_cors import CORS
+from models import db, Task
+import datetime
+
+app = Flask(__name__)
+app.config.from_pyfile("config.py")
+
+db.init_app(app)
+CORS(app)
+
+
+# CREATE TASK
+@app.route("/tasks", methods=["POST"])
+def create_task():
+
+    data = request.json
+
+    task = Task(
+        title=data["title"],
+        priority=data["priority"],
+        completed=False,
+        created_at=datetime.datetime.now()
+    )
+
+    db.session.add(task)
+    db.session.commit()
+
+    return jsonify({"message":"Task Created"})
+
+
+# VIEW + FILTER TASKS
+@app.route("/tasks", methods=["GET"])
+def get_tasks():
+
+    priority = request.args.get("priority")
+    completed = request.args.get("completed")
+
+    query = Task.query
+
+    if priority:
+        query = query.filter_by(priority=priority)
+
+    if completed:
+        query = query.filter_by(completed=(completed=="true"))
+
+    tasks = query.order_by(Task.created_at.desc()).all()
+
+    result=[]
+
+    for t in tasks:
+        result.append({
+            "id":t.id,
+            "title":t.title,
+            "priority":t.priority,
+            "completed":t.completed,
+            "created_at":t.created_at
+        })
+
+    return jsonify(result)
+
+
+# TOGGLE TASK
+@app.route("/tasks/<int:id>", methods=["PUT"])
+def toggle_task(id):
+
+    task = Task.query.get(id)
+
+    task.completed = not task.completed
+
+    db.session.commit()
+
+    return jsonify({"message":"Updated"})
+
+
+# DELETE TASK
+@app.route("/tasks/<int:id>", methods=["DELETE"])
+def delete_task(id):
+
+    task = Task.query.get(id)
+
+    db.session.delete(task)
+    db.session.commit()
+
+    return jsonify({"message":"Deleted"})
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import axios from "axios";
+
+const API = "http://localhost:5000";
+
+export const getTasks = (params) => axios.get(`${API}/tasks`,{params});
+export const createTask = (data) => axios.post(`${API}/tasks`,data);
+export const toggleTask = (id) => axios.put(`${API}/tasks/${id}`);
+export const deleteTask = (id) => axios.delete(`${API}/tasks/${id}`);
+
+
+
+
+
+
+
+
+import {useState} from "react";
+import {createTask} from "./api";
+
+function TaskForm({reload}){
+
+const [title,setTitle]=useState("");
+const [priority,setPriority]=useState("Low");
+
+const submit=async(e)=>{
+e.preventDefault();
+
+await createTask({title,priority});
+
+setTitle("");
+
+reload();
+}
+
+return(
+
+<form onSubmit={submit}>
+
+<input
+value={title}
+onChange={(e)=>setTitle(e.target.value)}
+placeholder="Task Title"
+/>
+
+<select
+value={priority}
+onChange={(e)=>setPriority(e.target.value)}
+>
+
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+
+</select>
+
+<button>Add Task</button>
+
+</form>
+
+)
+
+}
+
+export default TaskForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function Filters({priority,setPriority,completed,setCompleted}){
+
+return(
+
+<div>
+
+<select
+value={priority}
+onChange={(e)=>setPriority(e.target.value)}
+>
+
+<option value="">All Priority</option>
+<option value="Low">Low</option>
+<option value="Medium">Medium</option>
+<option value="High">High</option>
+
+</select>
+
+<label>
+
+<input
+type="checkbox"
+checked={completed}
+onChange={(e)=>setCompleted(e.target.checked)}
+/>
+
+Completed
+
+</label>
+
+</div>
+
+)
+
+}
+
+export default Filters;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function TaskTable({tasks,toggleTask,deleteTask}){
+
+return(
+
+<table border="1">
+
+<thead>
+<tr>
+<th>Title</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+{tasks.map(t=>(
+<tr key={t.id}>
+
+<td>{t.title}</td>
+<td>{t.priority}</td>
+
+<td>
+<input
+type="checkbox"
+checked={t.completed}
+onChange={()=>toggleTask(t.id)}
+/>
+</td>
+
+<td>
+<button onClick={()=>deleteTask(t.id)}>Delete</button>
+</td>
+
+</tr>
+))}
+
+</tbody>
+
+</table>
+
+)
+
+}
+
+export default TaskTable;
+
+
+
+
+
+
+
+
+
+
+
+
+
+import {useState,useEffect} from "react";
+import TaskForm from "./TaskForm";
+import TaskTable from "./TaskTable";
+import Filters from "./Filters";
+import {getTasks,toggleTask,deleteTask} from "./api";
+
+function App(){
+
+const [tasks,setTasks]=useState([]);
+const [priority,setPriority]=useState("");
+const [completed,setCompleted]=useState(false);
+
+const loadTasks=async()=>{
+
+const params={}
+
+if(priority) params.priority=priority
+if(completed) params.completed=true
+
+const res=await getTasks(params)
+
+setTasks(res.data)
+
+}
+
+useEffect(()=>{
+loadTasks()
+},[priority,completed])
+
+return(
+
+<div>
+
+<h1>Task Manager</h1>
+
+<TaskForm reload={loadTasks}/>
+
+<Filters
+priority={priority}
+setPriority={setPriority}
+completed={completed}
+setCompleted={setCompleted}
+/>
+
+<TaskTable
+tasks={tasks}
+toggleTask={async(id)=>{
+await toggleTask(id)
+loadTasks()
+}}
+deleteTask={async(id)=>{
+await deleteTask(id)
+loadTasks()
+}}
+/>
+
+</div>
+
+)
+
+}
+
+export default App;
+
+
+
+
+
+
+
+
+    
