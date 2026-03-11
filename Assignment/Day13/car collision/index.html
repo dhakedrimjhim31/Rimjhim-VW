@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Crash Simulation</title>
+</head>
+
+<body style="font-family:Arial; text-align:center;">
+
+<h2>Car Insurance Awareness</h2>
+
+<!-- ROAD -->
+<div id="road" style="
+    position:relative;
+    width:800px;
+    height:250px;
+    margin:auto;
+    border:3px solid black;
+    background:linear-gradient(#87CEEB 50%, #333 50%);
+    overflow:hidden;">
+
+    <!-- Road Divider -->
+    <div style="
+        position:absolute;
+        top:165px;
+        width:100%;
+        height:6px;
+        background:white;">
+    </div>
+
+    <!-- Car 1 -->
+    <div id="car1" style="
+        position:absolute;
+        left:0px;
+        top:120px;
+        font-size:55px;">
+        🚗
+    </div>
+
+    <!-- Car 2 -->
+    <div id="car2" style="
+        position:absolute;
+        right:0px;
+        top:120px;
+        font-size:55px;">
+        🚙
+    </div>
+
+    <!-- Explosion -->
+    <div id="explosion" style="
+        position:absolute;
+        font-size:70px;
+        display:none;">
+        💥
+    </div>
+
+</div>
+
+<br>
+
+<button onclick="startCar1()">Start Car 1</button>
+<button onclick="startCar2()">Start Car 2</button>
+
+<h3 id="message"></h3>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management</title>
+</head>
+
+<body>
+
+<h2>Add Book</h2>
+
+<input type="text" id="title" placeholder="Book Title">
+<input type="text" id="author" placeholder="Author">
+<input type="number" id="copies" placeholder="Copies">
+
+<button onclick="addBook()">Add Book</button>
+
+<h2>Books List</h2>
+
+<button onclick="loadBooks()">Show Books</button>
+
+<ul id="bookList"></ul>
+
+<script>
+
+function addBook() {
+
+    fetch("/books", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: document.getElementById("title").value,
+            author: document.getElementById("author").value,
+            copies: document.getElementById("copies").value
+        })
+    })
+    .then(res => res.json())
+    .then(data => alert(data.message))
+}
+
+function loadBooks(){
+
+    fetch("/books")
+    .then(res => res.json())
+    .then(data => {
+
+        let list = document.getElementById("bookList")
+        list.innerHTML = ""
+
+        data.forEach(book => {
+
+            let li = document.createElement("li")
+
+            li.innerHTML =
+            book.title + " by " + book.author +
+            " (copies: " + book.copies + ")" +
+            " <button onclick='borrowBook("+book.id+")'>Borrow</button>"
+
+            list.appendChild(li)
+
+        })
+
+    })
+
+}
+
+function borrowBook(id){
+
+    fetch("/borrow/"+id,{
+        method:"POST"
+    })
+    .then(res => res.json())
+    .then(data=>{
+        alert(data.message)
+        loadBooks()
+    })
+
+}
+
+</script>
+
+</body>
+</html>

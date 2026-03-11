@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2> Your cart</h2>
+
+{% if not cart %}
+   <p>Your cart is empty.</p>
+{% else %}
+
+<table class="table table-bordered shadow">
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+
+    {% for item, qty in cart.items() %}
+    <tr>
+        <td>{{ item }}</td>
+        <td>₹ {{ prices[item] }}</td>
+        <td>
+            <form method="POST" action="/cart/update">
+                <input type="hidden" name="item" value="{{ item }}">
+                <select name="quantity" class="form-select" onchange="this.form.submit()">
+                    {% for i in range(0,6) %}
+                       <option value="{{ i }}"
+                        {% if i == qty %}selected{% endif %}>
+                           {{ i }}
+                       </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </td>
+        <td>₹ {{ prices[item] * qty }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h4>Total Amount: ₹ {{ total }}</h4>
+
+<a href="/cart/clear">Clear Cart</a>
+
+{% endif %}
+{% endblock %}

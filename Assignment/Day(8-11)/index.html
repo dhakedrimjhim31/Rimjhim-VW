@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blossom & Bake | Flowers & Cakes</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Blossom & Bake 🌸🎂</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#flowers">Flowers</a>
+        <a href="#cakes">Cakes</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<main>
+
+<section id="home" class="hero">
+    <h1>Fresh Flowers & Delicious Cakes for Every Occasion</h1>
+    <p>Delivering happiness with beautiful bouquets and handcrafted cakes.</p>
+    <button onclick="scrollToSection('contact')">Order Now</button>
+</section>
+
+<section id="flowers">
+    <h2>Our Flower Collection 🌷</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400" alt="Rose Bouquet">
+            <h3>Rose Bouquet</h3>
+            <p>Elegant red roses perfect for romantic occasions.</p>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400" alt="Mixed Flowers">
+            <h3>Mixed Bouquet</h3>
+            <p>A vibrant mix of seasonal fresh flowers.</p>
+        </div>
+    </div>
+</section>
+
+<section id="cakes">
+    <h2>Our Cake Collection 🎂</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400" alt="Chocolate Cake">
+            <h3>Chocolate Delight</h3>
+            <p>Rich and creamy chocolate cake for sweet celebrations.</p>
+        </div>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=400" alt="Birthday Cake">
+            <h3>Birthday Special</h3>
+            <p>Customizable birthday cake with premium decoration.</p>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <h2>About Us</h2>
+    <p>
+        Blossom & Bake is dedicated to creating memorable moments with fresh flowers
+        and handcrafted cakes. We focus on quality, freshness, and customer satisfaction.
+    </p>
+</section>
+
+<section id="contact">
+    <h2>Contact & Order</h2>
+    <form onsubmit="submitForm(event)">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Order Details" required></textarea>
+        <button type="submit">Place Order</button>
+    </form>
+</section>
+
+</main>
+
+<footer>
+    © 2026 Blossom & Bake | Fresh Flowers & Cakes Delivered with Love
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
