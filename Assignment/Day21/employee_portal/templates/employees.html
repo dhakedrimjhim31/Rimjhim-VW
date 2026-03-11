@@ -1,0 +1,21 @@
+<h2>Employees</h2>
+
+<a href="/add_user">Create User</a>
+
+<br><br>
+
+{% for e in employees %}
+
+<p>
+
+{{e.name}} - {{e.department}}
+
+<a href="/employee/{{e.id}}">View</a>
+
+<a href="/employee/{{e.id}}/edit">Edit</a>
+
+<a href="/employee/{{e.id}}/delete">Delete</a>
+
+</p>
+
+{% endfor %}
