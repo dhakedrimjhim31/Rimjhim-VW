@@ -573,3 +573,243 @@ Register
 }
 
 export default RegisterPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####################################################################################################
+import { useState } from "react";
+import "./login_style.css";
+
+function LoginPage() {
+
+const [email,setEmail] = useState("");
+const [password,setPassword] = useState("");
+
+const [username,setUsername] = useState("");
+const [role,setRole] = useState("");
+
+const handleLogin = (e)=>{
+e.preventDefault();
+console.log("Login Data:",email,password);
+}
+
+const handleSignup = (e)=>{
+e.preventDefault();
+console.log("Signup Data:",username,email,password,role);
+}
+
+return (
+
+<div className="container">
+
+<input type="checkbox" id="flip" />
+
+<div className="cover">
+
+<div className="front">
+<img src="/image.png" alt="" />
+<div className="text">
+<span className="text-1">
+Because <br/> better health <br/> begins with better <br/> CARE
+</span>
+<span className="text-2">Let's get started.</span>
+</div>
+</div>
+
+<div className="back">
+<div className="text">
+<span className="text-1">
+Complete miles of journey <br/> with one step
+</span>
+<span className="text-2">Let's get started</span>
+</div>
+</div>
+
+</div>
+
+
+<div className="forms">
+<div className="form-content">
+
+
+{/* LOGIN FORM */}
+
+<div className="login-form">
+
+<div className="title">Login</div>
+
+<form onSubmit={handleLogin}>
+
+<div className="input-boxes">
+
+<div className="input-box">
+<i className="fas fa-envelope"></i>
+
+<input
+type="email"
+placeholder="Enter your email"
+value={email}
+onChange={(e)=>setEmail(e.target.value)}
+required
+/>
+
+</div>
+
+
+<div className="input-box">
+<i className="fas fa-lock"></i>
+
+<input
+type="password"
+placeholder="Enter your password"
+value={password}
+onChange={(e)=>setPassword(e.target.value)}
+required
+/>
+
+</div>
+
+
+<div className="text">
+<label htmlFor="flip">Forgot password?</label>
+</div>
+
+
+<div className="button input-box">
+<input type="submit" value="Submit"/>
+</div>
+
+
+<div className="text sign-up-text">
+Don't have an account?
+<label htmlFor="flip"> Signup now</label>
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+
+
+{/* SIGNUP FORM */}
+
+<div className="signup-form">
+
+<div className="title">Signup</div>
+
+<form onSubmit={handleSignup}>
+
+<div className="input-boxes">
+
+
+<div className="input-box">
+<i className="fas fa-user"></i>
+
+<input
+type="text"
+placeholder="Enter your name"
+value={username}
+onChange={(e)=>setUsername(e.target.value)}
+required
+/>
+
+</div>
+
+
+<div className="input-box">
+<i className="fas fa-envelope"></i>
+
+<input
+type="email"
+placeholder="Enter your email"
+value={email}
+onChange={(e)=>setEmail(e.target.value)}
+required
+/>
+
+</div>
+
+
+<div className="input-box">
+<i className="fas fa-lock"></i>
+
+<input
+type="password"
+placeholder="Enter your password"
+value={password}
+onChange={(e)=>setPassword(e.target.value)}
+required
+/>
+
+</div>
+
+
+<div className="input-box">
+<i className="fas fa-user"></i>
+
+<input
+type="text"
+placeholder="Enter your role"
+value={role}
+onChange={(e)=>setRole(e.target.value)}
+required
+/>
+
+</div>
+
+
+<div className="button input-box">
+<input type="submit" value="Submit"/>
+</div>
+
+
+<div className="text sign-up-text">
+Already have an account?
+<label htmlFor="flip"> Login now</label>
+</div>
+
+
+</div>
+
+</form>
+
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+);
+
+}
+
+export default LoginPage;
+
+
+
+
