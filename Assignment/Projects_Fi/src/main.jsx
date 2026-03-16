@@ -375,3 +375,201 @@ export default function App() {
     </Router>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###################################################################################
+LoginPage.jsx
+import { useState } from "react";
+
+function LoginPage() {
+
+const [email,setEmail] = useState("");
+const [password,setPassword] = useState("");
+
+const handleLogin = (e) =>{
+e.preventDefault();
+
+if(email === "" || password === ""){
+alert("Please enter email and password");
+}else{
+alert("Login successful");
+}
+
+}
+
+return(
+
+<div style={{
+display:"flex",
+justifyContent:"center",
+alignItems:"center",
+height:"100vh",
+background:"#f2f2f2"
+}}>
+
+<div style={{
+background:"white",
+padding:"30px",
+borderRadius:"10px",
+boxShadow:"0px 0px 10px gray",
+width:"300px"
+}}>
+
+<h2 style={{textAlign:"center"}}>Login</h2>
+
+<form onSubmit={handleLogin}>
+
+<input
+type="email"
+placeholder="Enter Email"
+value={email}
+onChange={(e)=>setEmail(e.target.value)}
+style={{width:"100%",padding:"10px",marginBottom:"10px"}}
+/>
+
+<input
+type="password"
+placeholder="Enter Password"
+value={password}
+onChange={(e)=>setPassword(e.target.value)}
+style={{width:"100%",padding:"10px",marginBottom:"10px"}}
+/>
+
+<button
+type="submit"
+style={{
+width:"100%",
+padding:"10px",
+background:"#4CAF50",
+color:"white",
+border:"none"
+}}
+>
+Login
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+)
+
+}
+
+export default LoginPage;
+
+
+
+##############################
+RegisterPage.jsx
+import { useState } from "react";
+
+function RegisterPage(){
+
+const [name,setName] = useState("");
+const [email,setEmail] = useState("");
+const [password,setPassword] = useState("");
+
+const handleRegister = (e)=>{
+e.preventDefault();
+
+if(name==="" || email==="" || password===""){
+alert("Please fill all fields");
+}else{
+alert("Account created successfully");
+}
+
+}
+
+return(
+
+<div style={{
+display:"flex",
+justifyContent:"center",
+alignItems:"center",
+height:"100vh",
+background:"#f2f2f2"
+}}>
+
+<div style={{
+background:"white",
+padding:"30px",
+borderRadius:"10px",
+boxShadow:"0px 0px 10px gray",
+width:"300px"
+}}>
+
+<h2 style={{textAlign:"center"}}>Sign Up</h2>
+
+<form onSubmit={handleRegister}>
+
+<input
+type="text"
+placeholder="Enter Name"
+value={name}
+onChange={(e)=>setName(e.target.value)}
+style={{width:"100%",padding:"10px",marginBottom:"10px"}}
+/>
+
+<input
+type="email"
+placeholder="Enter Email"
+value={email}
+onChange={(e)=>setEmail(e.target.value)}
+style={{width:"100%",padding:"10px",marginBottom:"10px"}}
+/>
+
+<input
+type="password"
+placeholder="Enter Password"
+value={password}
+onChange={(e)=>setPassword(e.target.value)}
+style={{width:"100%",padding:"10px",marginBottom:"10px"}}
+/>
+
+<button
+type="submit"
+style={{
+width:"100%",
+padding:"10px",
+background:"#2196F3",
+color:"white",
+border:"none"
+}}
+>
+Register
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+)
+
+}
+
+export default RegisterPage;
