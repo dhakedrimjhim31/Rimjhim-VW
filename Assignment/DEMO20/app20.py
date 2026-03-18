@@ -134,3 +134,152 @@ edit_student.html:
 
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###################################################################
+Error:
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+11:18:19 PM [vite] (client) page reload web/index.html
+11:18:19 PM [vite] (client) page reload index.html
+11:18:19 PM [vite] vite.config.js changed, restarting server...
+11:18:19 PM [vite] server restarted.
+(!) Failed to run dependency scan. Skipping dependency pre-bundling. Error: The following dependencies are imported but could not be resolved:
+
+  react (imported by C:/Users/Administrator/Desktop/P/src/App.jsx)
+  react-dom/client (imported by C:/Users/Administrator/Desktop/P/src/main.jsx)
+  react/jsx-dev-runtime (imported by C:/Users/Administrator/Desktop/P/src/App.jsx)
+
+Are they installed?
+    at file:///C:/Users/Administrator/Desktop/P/node_modules/vite/dist/node/chunks/node.js:31204:33
+    at async file:///C:/Users/Administrator/Desktop/P/node_modules/vite/dist/node/chunks/node.js:23069:15
+
+ *  History restored 
+
+PS C:\Users\Administrator\Desktop\P> cd web
+PS C:\Users\Administrator\Desktop\P\web> npm install
+
+up to date, audited 153 packages in 2s
+
+36 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+PS C:\Users\Administrator\Desktop\P\web> npm run dev
+
+> p@0.0.0 dev
+> vite
+
+11:32:13 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+  VITE v8.0.0  ready in 611 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+(!) Failed to run dependency scan. Skipping dependency pre-bundling. Error: The following dependencies are imported but could not be resolved:
+
+  bootstrap/dist/css/bootstrap.min.css (imported by C:/Users/Administrator/Desktop/P/web/src/main.jsx)
+  react-router-dom (imported by C:/Users/Administrator/Desktop/P/web/src/shared/layouts/Sidebar.jsx)
+  prop-types (imported by C:/Users/Administrator/Desktop/P/web/src/shared/components/DataTable.jsx)
+  axios (imported by C:/Users/Administrator/Desktop/P/web/src/core/api.js)
+  lucide-react (imported by C:/Users/Administrator/Desktop/P/web/src/shared/layouts/Sidebar.jsx)
+
+Are they installed?
+    at file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:31204:33
+    at async file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:23069:15
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "bootstrap/dist/css/bootstrap.min.css" from "src/main.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+11:32:27 PM [vite] Internal server error: Failed to resolve import "bootstrap/dist/css/bootstrap.min.css" from "src/main.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/main.jsx:5:7
+  3  |  import App from "./App";
+  4  |  import { AppProvider } from "./core/store";
+  5  |  import "bootstrap/dist/css/bootstrap.min.css";
+     |          ^
+  6  |  import "./styles.css";
+  7  |  var _jsxFileName = "C:/Users/Administrator/Desktop/P/web/src/main.jsx";     
+      at TransformPluginContext._formatLog (file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:30209:39)
+      at TransformPluginContext.error (file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:30206:14)
+      at normalizeUrl (file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:27496:18)
+      at async file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:27559:30
+      at async Promise.all (index 4)
+      at async TransformPluginContext.transform (file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:27527:4)
+      at async EnvironmentPluginContainer.transform (file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:29998:14)
+      at async loadAndTransform (file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:24133:26)
+      at async viteTransformMiddleware (file:///C:/Users/Administrator/Desktop/P/web/node_modules/vite/dist/node/chunks/node.js:24941:20)
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-rou
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/App.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/features/auth/LoginPage.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/features/auth/LoginPage.jsx:2:34   
+  1  |  import { useState } from "react";
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/features/auth/RegisterPage.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/features/auth/RegisterPage.jsx:2:3411:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/core/RequireAuth.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/core/RequireAuth.jsx:1:38
+  1  |  import { Navigate, useLocation } from "react-router-dom";
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/shared/layouts/AppLayout.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/shared/layouts/AppLayout.jsx:3:23  
+  1  |  import Sidebar from "./Sidebar";
+  2  |  import Navbar from "./Navbar";
+  3  |  import { Outlet } from "react-router-dom";
+     |                          ^
+  4  |  var _jsxFileName = "C:/Users/Administrator/Desktop/P/web/src/shared/layouts/AppLayout.jsx";
+  5  |  import { jsxDEV as _jsxDEV } from "react/jsx-dev-runtime"; (x2)
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/core/router.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/core/router.jsx:1:36
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "prop-types" from "src/shared/components/DataTable.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/shared/components/DataTable.jsx:2:22
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/shared/layouts/Navbar.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/shared/layouts/Sidebar.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/shared/layouts/Sidebar.jsx:1:25    
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/features/auth/RegisterPage.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/features/auth/RegisterPage.jsx:2:34  1  |  import { useState } from "react";
+  2  |  import { Link, useNavigate } from "react-router-dom";
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/shared/layouts/AppLayout.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/shared/layouts/AppLayout.jsx:3:23  
+  1  |  import Sidebar from "./Sidebar";
+  2  |  import Navbar from "./Navbar";
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/features/auth/LoginPage.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/features/auth/LoginPage.jsx:2:34   
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/core/RequireAuth.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "axios" from "src/core/api.js". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/core/api.js:1:18
+  1  |  import axios from "axios";
+     |                     ^
+  2  |  const api = axios.create({
+11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "lucide-react" from "src/shared/layouts/Sidebar.jsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: C:/Users/Administrator/Desktop/P/web/src/shared/layouts/Sidebar.jsx:8:7     
+  1  |  import { NavLink } from "react-router-dom";
+  2  |  import { useApp } from "../../core/useApp";
+  3  |  import { LayoutDashboard, Package, ClipboardList, AlertCircle } from "lucide11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/shared/layouts/Navbar.jsx". Does the file exist?
