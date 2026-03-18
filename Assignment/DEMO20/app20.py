@@ -283,3 +283,40 @@ Are they installed?
   1  |  import { NavLink } from "react-router-dom";
   2  |  import { useApp } from "../../core/useApp";
   3  |  import { LayoutDashboard, Package, ClipboardList, AlertCircle } from "lucide11:32:27 PM [vite] (client) Pre-transform error: Failed to resolve import "react-router-dom" from "src/shared/layouts/Navbar.jsx". Does the file exist?
+
+
+
+
+
+
+
+
+
+
+
+
+
+###################################################################################
+api error
+PS C:\Users\Administrator\Desktop\P> cd api
+PS C:\Users\Administrator\Desktop\P\api> python run.py
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\P\api\run.py", line 1, in <module>
+    from app import create_app
+  File "C:\Users\Administrator\Desktop\P\api\app\__init__.py", line 3, in <module>
+    from dotenv import load_dotenv
+ModuleNotFoundError: No module named 'dotenv'
+PS C:\Users\Administrator\Desktop\P\api> flask run
+Usage: flask run [OPTIONS]
+Try 'flask run --help' for help.
+
+Error: While importing 'app', an ImportError was raised:
+
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\site-packages\flask\cli.py", line 245, in locate_app
+    __import__(module_name)
+  File "C:\Users\Administrator\Desktop\P\api\app\__init__.py", line 3, in <module>
+    from dotenv import load_dotenv
+ModuleNotFoundError: No module named 'dotenv'
+
+PS C:\Users\Administrator\Desktop\P\api> 
