@@ -345,3 +345,23 @@ ModuleNotFoundError: No module named 'flask_migrate'
 
 
 
+
+
+
+
+
+
+
+
+###############################################
+Installing collected packages: typing-extensions, Mako, greenlet, SQLAlchemy, Flask-SQLAlchemy, alembic, flask-migrate
+Successfully installed Flask-SQLAlchemy-3.1.1 Mako-1.3.10 SQLAlchemy-2.0.48 alembic-1.18.4 flask-migrate-4.1.0 greenlet-3.3.2 typing-extensions-4.15.0
+
+[notice] A new release of pip is available: 23.2.1 -> 26.0.1       
+[notice] To update, run: python.exe -m pip install --upgrade pip   
+(venv) PS C:\Users\Administrator\Desktop\P\api> python run.py
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\P\api\run.py", line 1, in <module>
+    from app import create_app
+  File "C:\Users\Administrator\Desktop\P\api\app\__init__.py", line 5, in <module>
+    from flask_jwt_extended import JWTManager
