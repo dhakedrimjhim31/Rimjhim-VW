@@ -365,3 +365,27 @@ Traceback (most recent call last):
     from app import create_app
   File "C:\Users\Administrator\Desktop\P\api\app\__init__.py", line 5, in <module>
     from flask_jwt_extended import JWTManager
+
+
+
+
+
+
+
+
+
+
+
+
+
+###########################################################
+(venv) PS C:\Users\Administrator\Desktop\P\api> python run.py
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\P\api\run.py", line 3, in <module>
+    app = create_app()
+          ^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\P\api\app\__init__.py", line 43, in create_app
+    from app.modules.issues.routes import issue_bp
+  File "C:\Users\Administrator\Desktop\P\api\app\modules\issues\routes.py", line 2, in <module>
+    from marshmallow import ValidationError
+ModuleNotFoundError: No module named 'marshmallow'
