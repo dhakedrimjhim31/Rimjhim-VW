@@ -320,3 +320,28 @@ Traceback (most recent call last):
 ModuleNotFoundError: No module named 'dotenv'
 
 PS C:\Users\Administrator\Desktop\P\api> 
+
+
+
+
+
+
+
+##################################
+error venv
+Installing collected packages: python-dotenv, markupsafe, itsdangerous, colorama, blinker, werkzeug, jinja2, click, flask, flask-cors 
+Successfully installed blinker-1.9.0 click-8.3.1 colorama-0.4.6 flask-3.1.3 flask-cors-6.0.2 itsdangerous-2.2.0 jinja2-3.1.6 markupsafe-3.0.3 python-dotenv-1.2.2 werkzeug-3.1.6
+
+[notice] A new release of pip is available: 23.2.1 -> 26.0.1       
+[notice] To update, run: python.exe -m pip install --upgrade pip   
+(venv) PS C:\Users\Administrator\Desktop\P\api> python run.py
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\P\api\run.py", line 1, in <module>
+    from app import create_app
+  File "C:\Users\Administrator\Desktop\P\api\app\__init__.py", line 4, in <module>
+    from flask_migrate import Migrate
+ModuleNotFoundError: No module named 'flask_migrate'
+(venv) PS C:\Users\Administrator\Desktop\P\api> 
+
+
+
